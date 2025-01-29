@@ -20,29 +20,10 @@ public class ReportMapper {
             report.setBrand(wb.getProductData().getProducts().get(0).getBrand());
             report.setFullName(wb.getProductData().getProducts().get(0).getName());
             report.setSupplier(wb.getProductData().getProducts().get(0).getSupplier());
-            report.setSupplierId(wb.getProductData().getProducts().get(0).getSupplierId());
             report.setPrice(getPrice(wb));
             report.setPriceBeforeDiscount(getPriceBeforeDiscount(wb));
-            report.setQty(getStock(wb));
-            report.setTotalDeliveryTimeInDays(wb.getProductData().getProducts().get(0).getTotalQuantity());
-            report.setBrandId(wb.getProductData().getProducts().get(0).getBrandId());
-            report.setWhId(wb.getProductData().getProducts().get(0).getWh());
-            report.setAssemblyTime(wb.getProductData().getProducts().get(0).getDtype());
-            report.setCourierDeliveryTime(wb.getProductData().getProducts().get(0).getTime1());
-            report.setTotalDeliveryTime(wb.getProductData().getProducts().get(0).getTime2());
-
         }
         return report;
-    }
-
-    private Integer getStock(Waldberries wb) {
-        Waldberries.Size size = wb.getProductData().getProducts().get(0).getSizes()
-                .stream().findFirst()
-                .orElse(new Waldberries.Size());
-        if (!size.getStocks().isEmpty()) {
-            return size.getStocks().get(0).getQty();
-        }
-        return 0;
     }
 
     private Double getPrice(Waldberries wb) {

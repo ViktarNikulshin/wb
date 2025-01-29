@@ -12,12 +12,4 @@ public class Report {
     private String supplier;
     private Double price;
     private Double priceBeforeDiscount;
-    private Integer qty;
-    private Integer totalDeliveryTimeInDays;
-    private Integer	brandId;
-    private Integer supplierId;
-    private Integer whId;
-    private Integer assemblyTime;
-    private Integer courierDeliveryTime;
-    private Integer totalDeliveryTime;
 }
