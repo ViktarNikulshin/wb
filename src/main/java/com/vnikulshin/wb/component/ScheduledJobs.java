@@ -1,7 +1,6 @@
 package com.vnikulshin.wb.component;
 
 import com.vnikulshin.wb.service.ParserService;
-import com.vnikulshin.wb.service.SheetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,18 +14,11 @@ import java.security.GeneralSecurityException;
 @RequiredArgsConstructor
 public class ScheduledJobs {
     private final ParserService parserService;
-    private final SheetService sheetService;
 
-    @Scheduled(fixedRate = 30000)
-    public void updatePrice() throws IOException, GeneralSecurityException {
+    @Scheduled(fixedRateString = "PT10M")
+    public void updatePrice() throws IOException, GeneralSecurityException, IllegalAccessException {
         log.info("Updating price...");
         parserService.parserWB();
     }
 
-
-//    @Scheduled(fixedRate = 5000)
-//    public void getSheell() throws IOException, GeneralSecurityException {
-//        log.info("Updating s...");
-//        sheetService.getSheet();
-//    }
 }

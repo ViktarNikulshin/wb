@@ -27,15 +27,12 @@ public class ParserService {
     private final SheetService sheetService;
     private static final String BASE_URL = "https://card.wb.ru/cards/v2/detail?appType=1&curr=byn&dest=-59202&spp=30&hide_dtype=10&ab_testing=false&nm=";
 
-    public void parserWB () throws IOException, GeneralSecurityException {
+    public void parserWB() throws IOException, GeneralSecurityException, IllegalAccessException {
 
         List<String> links = sheetService.getSheet();
         List<Report> reports = new ArrayList<>();
-        List<String> ids = links.stream().map(s -> {
-            return s.substring(s.indexOf("log/") + 4, s.indexOf("/det"));
-        }).toList();
-        for (String id : ids) {
-            log.info("id: {}", id);
+
+        for (String id : links) {
 
             URL obj = new URL(BASE_URL + id);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
@@ -52,12 +49,15 @@ public class ParserService {
             in.close();
             ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Waldberries wb = mapper.readValue(resp.toString(), Waldberries.class);
-            if (wb != null && wb.getProductData() != null && !wb.getProductData().getProducts().isEmpty()) {
-                log.info(wb.getProductData().getProducts().get(0).getName() );
-
-            }
             Report report = reportMapper.getReport(wb);
-            reports.add(report);
+            if (report.getId() != null) {
+                reports.add(report);
+            } else {
+                log.info("Product not found - {}", id);
+                report.setId(Integer.parseInt(id));
+                reports.add(report);
+            }
         }
+        sheetService.setSheet(reports);
     }
 }
