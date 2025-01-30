@@ -15,7 +15,7 @@ import java.security.GeneralSecurityException;
 public class ScheduledJobs {
     private final ParserService parserService;
 
-    @Scheduled(fixedRateString = "PT10M")
+    @Scheduled(fixedRateString = "${app.job.parser.rate}")
     public void updatePrice() throws IOException, GeneralSecurityException, IllegalAccessException {
         log.info("Updating price...");
         parserService.parserWB();

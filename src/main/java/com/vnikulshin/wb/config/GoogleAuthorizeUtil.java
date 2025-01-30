@@ -9,6 +9,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +20,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 
 
+@Slf4j
 public class GoogleAuthorizeUtil {
     private static final String CREDENTIALS_FILE_PATH = "/cert.json";
 
@@ -32,7 +34,7 @@ public class GoogleAuthorizeUtil {
 
 
         List<String> scopes = List.of(SheetsScopes.SPREADSHEETS);
-
+        log.info(new FileDataStoreFactory(new File("tokens")).getDataDirectory().getAbsolutePath());
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), clientSecrets, scopes)
                 .setDataStoreFactory(new FileDataStoreFactory(new File("tokens")))

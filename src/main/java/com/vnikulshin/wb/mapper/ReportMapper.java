@@ -32,7 +32,7 @@ public class ReportMapper {
                 .orElse(new Waldberries.Size());
 
         if (size.getPrice() != null) {
-            return (double) (size.getPrice().getProduct()) / 100;
+            return (double) (size.getPrice().getTotal()) / 100;
 
         }
         return 0.0;
