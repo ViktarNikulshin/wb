@@ -34,7 +34,6 @@ public class GoogleAuthorizeUtil {
 
 
         List<String> scopes = List.of(SheetsScopes.SPREADSHEETS);
-        log.info(new FileDataStoreFactory(new File("tokens")).getDataDirectory().getAbsolutePath());
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), clientSecrets, scopes)
                 .setDataStoreFactory(new FileDataStoreFactory(new File("tokens")))
