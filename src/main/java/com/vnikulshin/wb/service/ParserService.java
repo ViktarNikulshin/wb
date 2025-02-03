@@ -8,6 +8,7 @@ import com.vnikulshin.wb.model.Report;
 import com.vnikulshin.wb.model.Waldberries;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -25,7 +26,8 @@ import java.util.List;
 public class ParserService {
     private final ReportMapper reportMapper;
     private final SheetService sheetService;
-    private static final String BASE_URL = "https://card.wb.ru/cards/v2/detail?appType=1&curr=byn&dest=-59202&spp=30&hide_dtype=10&ab_testing=false&nm=";
+    @Value("${app.url.base-wb}")
+    private String BASE_URL ;
 
     public void parserWB() throws IOException, GeneralSecurityException, IllegalAccessException {
 

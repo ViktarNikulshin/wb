@@ -6,6 +6,7 @@ import com.vnikulshin.wb.model.Report;
 import com.vnikulshin.wb.util.SheetsServiceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,16 +24,17 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SheetService {
-
-    private static final String ID_SHEET = "1_PfQXuf9t9OEZXZQGECZBXFjf7RNeKv4l1ZpYzsJZXo";
-    private static final String ID_SHEET_TEST = "1-C6w3xTMKgwYJIEeUOA3Wi1BrBaxHJEsfhhd7L_oXMY";
-    private static final String RANGE = "wb_out";
-    private static final String RANGE_TEST = "out_wb";
+    @Value("${app.exel.sheet}")
+    private String SHEET_ID;
+    @Value("${app.exel.list-in}")
+    private String LIST_IN;
+    @Value("${app.exel.list-out}")
+    private String LIST_OUT;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public List<String> getSheet() throws IOException, GeneralSecurityException {
         ValueRange readResult = SheetsServiceUtil.getSheetsService().spreadsheets().values()
-                .get(ID_SHEET, "output_id")
+                .get(SHEET_ID, LIST_IN)
                 .execute();
         List<List<Object>> values = readResult.getValues();
         return values.stream().map(l -> l.get(0).toString()).collect(Collectors.toList());
@@ -56,13 +58,13 @@ public class SheetService {
         SheetsServiceUtil.getSheetsService()
                 .spreadsheets()
                 .values()
-                .clear(ID_SHEET, RANGE, new ClearValuesRequest())
+                .clear(SHEET_ID, LIST_OUT, new ClearValuesRequest())
                 .execute();
 
         ValueRange body = new ValueRange()
                 .setValues(values);
         SheetsServiceUtil.getSheetsService().spreadsheets().values()
-                .update(ID_SHEET, RANGE, body)
+                .update(SHEET_ID, LIST_OUT, body)
                 .setValueInputOption("RAW")
                 .execute();
     }

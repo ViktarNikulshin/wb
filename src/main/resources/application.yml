@@ -5,3 +5,9 @@ app:
   job:
     parser:
       rate: PT10M
+  url:
+    base-wb: https://card.wb.ru/cards/v2/detail?appType=1&curr=byn&dest=-59202&spp=30&hide_dtype=10&ab_testing=false&nm=
+  exel:
+    sheet: 1_PfQXuf9t9OEZXZQGECZBXFjf7RNeKv4l1ZpYzsJZXo
+    list-in: output_id
+    list-out: wb_out
