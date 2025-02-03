@@ -4,10 +4,10 @@ spring:
 app:
   job:
     parser:
-      rate: PT10M
+      rate: PT10M # период обновления данных в формате https://en.wikipedia.org/wiki/ISO_8601#Durations
   url:
-    base-wb: https://card.wb.ru/cards/v2/detail?appType=1&curr=byn&dest=-59202&spp=30&hide_dtype=10&ab_testing=false&nm=
+    base-wb: https://card.wb.ru/cards/v2/detail?appType=1&curr=byn&dest=-59202&spp=30&hide_dtype=10&ab_testing=false&nm= # url для WB
   exel:
-    sheet: 1_PfQXuf9t9OEZXZQGECZBXFjf7RNeKv4l1ZpYzsJZXo
-    list-in: output_id
-    list-out: wb_out
+    sheet: 1_PfQXuf9t9OEZXZQGECZBXFjf7RNeKv4l1ZpYzsJZXo  # id google Таблицы
+    list-in: output_id # лист с id
+    list-out: wb_out   # лист для записи данных
