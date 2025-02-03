@@ -4,7 +4,7 @@
 3. создать папку target
 4. поместить туда war файл
 5. создать папку tokens
-6. поместить туда [StoredCredential](tokens%2FStoredCredential)
+6. поместить туда StoredCredential
 7. открыть терминал в docker-desktop 
 8. перейти командой cd в папку с Dockerfile 
 9. выполнить команду docker build . 
