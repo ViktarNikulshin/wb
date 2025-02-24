@@ -11,3 +11,7 @@ app:
     sheet: 1_PfQXuf9t9OEZXZQGECZBXFjf7RNeKv4l1ZpYzsJZXo  # id google Таблицы
     list-in: output_id # лист с id
     list-out: wb_out   # лист для записи данных
+  bot:
+    name: VNikulshin_bot
+    token: 5318239338:AAF4-2FLJbaH11KkPB8plg7HGWP-kVkgvwE
+    chat-id: -1002320394527

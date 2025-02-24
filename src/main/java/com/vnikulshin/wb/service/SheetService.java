@@ -32,15 +32,17 @@ public class SheetService {
     private String LIST_OUT;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public List<String> getSheet() throws IOException, GeneralSecurityException {
-        ValueRange readResult = SheetsServiceUtil.getSheetsService().spreadsheets().values()
+    private final SheetsServiceUtil sheetsServiceUtil;
+
+    public List<String> getSheet() throws IOException, InterruptedException {
+        ValueRange readResult = sheetsServiceUtil.getSheetsService().spreadsheets().values()
                 .get(SHEET_ID, LIST_IN)
                 .execute();
         List<List<Object>> values = readResult.getValues();
         return values.stream().map(l -> l.get(0).toString()).collect(Collectors.toList());
     }
 
-    public void setSheet(List<Report> reports) throws IOException, GeneralSecurityException, IllegalAccessException {
+    public void setSheet(List<Report> reports) throws IOException, IllegalAccessException, InterruptedException {
         List<List<Object>> values = new ArrayList<>();
         Class<Report> outputClass = Report.class;
         Field[] fields = outputClass.getDeclaredFields();
@@ -55,7 +57,7 @@ public class SheetService {
             }
             values.add(reportToString);
         }
-        SheetsServiceUtil.getSheetsService()
+        sheetsServiceUtil.getSheetsService()
                 .spreadsheets()
                 .values()
                 .clear(SHEET_ID, LIST_OUT, new ClearValuesRequest())
@@ -63,7 +65,7 @@ public class SheetService {
 
         ValueRange body = new ValueRange()
                 .setValues(values);
-        SheetsServiceUtil.getSheetsService().spreadsheets().values()
+        sheetsServiceUtil.getSheetsService().spreadsheets().values()
                 .update(SHEET_ID, LIST_OUT, body)
                 .setValueInputOption("RAW")
                 .execute();

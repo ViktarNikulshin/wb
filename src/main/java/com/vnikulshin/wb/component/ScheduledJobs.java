@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 @Slf4j
 @Component
@@ -16,7 +15,7 @@ public class ScheduledJobs {
     private final ParserService parserService;
 
     @Scheduled(fixedRateString = "${app.job.parser.rate}")
-    public void updatePrice() throws IOException, GeneralSecurityException, IllegalAccessException {
+    public void updatePrice() throws IOException, IllegalAccessException, InterruptedException {
         log.info("Updating price...");
         parserService.parserWB();
     }

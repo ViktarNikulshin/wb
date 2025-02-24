@@ -29,7 +29,7 @@ public class ParserService {
     @Value("${app.url.base-wb}")
     private String BASE_URL ;
 
-    public void parserWB() throws IOException, GeneralSecurityException, IllegalAccessException {
+    public void parserWB() throws IOException, IllegalAccessException, InterruptedException {
 
         List<String> links = sheetService.getSheet();
         List<Report> reports = new ArrayList<>();
