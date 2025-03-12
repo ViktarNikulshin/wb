@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.vnikulshin</groupId>
 	<artifactId>wb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>parserWb</name>
 	<description>Perser WB</description>

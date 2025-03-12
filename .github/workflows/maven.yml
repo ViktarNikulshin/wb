@@ -19,11 +19,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Copy war
+      run: mkdir staging && cp target/*.war staging
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: wb
-        path: target/*.war
+        name: Package
+        path: staging
         retention-days: 5
   upload:
     needs: build
@@ -32,7 +34,7 @@ jobs:
       - name: Copy folder content recursively to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: /home/runner/work/wb/wb/target/wb-0.0.1-SNAPSHOT.war
+          local: staging
           remote: home/wb/temp
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
