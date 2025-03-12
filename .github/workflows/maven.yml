@@ -20,12 +20,12 @@ jobs:
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots verify
     - name: Copy war
-      run: mkdir target && cp target/*.war target
+      run: mkdir wb && cp target/*.war wb
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
         name: Package
-        path: target
+        path: wb
         retention-days: 5
     - name: Echo download path
       run: | 
@@ -35,8 +35,8 @@ jobs:
     - name: Copy folder content recursively to remote
       uses: appleboy/scp-action@v0.1.7
       with:
-        source: target/wb-1.0.0.war
-        target: home/wb
+        source: wb/wb-1.0.0.war
+        target: home
         host: 185.173.94.106
         username: root
         password: gNHWBKf
