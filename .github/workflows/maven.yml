@@ -21,6 +21,8 @@ jobs:
       run: mvn --batch-mode --update-snapshots verify
     - name: Copy war
       run: mkdir wb && cp target/*.war wb
+    - name: Copy dockerfile
+      run: cp Dockerfile wb
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -29,8 +31,7 @@ jobs:
         retention-days: 5
     - name: Echo download path
       run: | 
-          echo target
-          cd target
+          cd wb
           ls -la
     - name: Copy folder content recursively to remote
       uses: appleboy/scp-action@v0.1.7
