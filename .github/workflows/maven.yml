@@ -33,10 +33,10 @@ jobs:
           cd staging
           ls -la
     - name: Copy folder content recursively to remote
-      uses: garygrossgarten/github-action-scp@release
+      uses: appleboy/scp-action@v0.1.7
       with:
-        local: staging/wb-1.0.0.war
-        remote: home/wb
+        source: staging/wb-1.0.0.war
+        target: home/wb
         host: 185.173.94.106
         username: root
         password: gNHWBKf
