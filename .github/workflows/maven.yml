@@ -27,16 +27,16 @@ jobs:
         name: Package
         path: staging
         retention-days: 5
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Copy folder content recursively to remote
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: staging
-          remote: home/wb/temp
-          host: 185.173.94.106
-          username: root
-          password: gNHWBKf
+#  upload:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Copy folder content recursively to remote
+#        uses: garygrossgarten/github-action-scp@release
+#        with:
+#          local: staging
+#          remote: home/wb/temp
+#          host: 185.173.94.106
+#          username: root
+#          password: gNHWBKf
 
