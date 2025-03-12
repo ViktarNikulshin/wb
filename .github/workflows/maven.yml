@@ -35,7 +35,7 @@ jobs:
     - name: Copy folder content recursively to remote
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: staging
+        local: staging/wb-1.0.0.war
         remote: home/wb/temp
         host: 185.173.94.106
         username: root
