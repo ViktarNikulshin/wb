@@ -26,6 +26,7 @@ jobs:
         path: target/*.war
         retention-days: 5
   upload:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Copy folder content recursively to remote
