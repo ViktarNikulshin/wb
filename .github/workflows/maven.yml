@@ -36,7 +36,7 @@ jobs:
     - name: Copy folder content recursively to remote
       uses: appleboy/scp-action@v0.1.7
       with:
-        source: "wb/wb-1.0.0.war,wb/Dockerfile"
+        source: "wb/wb-1.0.0.war,wb/Dockerfile,tokens"
         target: home
         host: 185.173.94.106
         username: root
