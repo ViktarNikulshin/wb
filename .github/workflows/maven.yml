@@ -32,14 +32,12 @@ jobs:
           echo staging
           cd staging
           ls -la
-
-#    steps:
-#      - name: Copy folder content recursively to remote
-#        uses: garygrossgarten/github-action-scp@release
-#        with:
-#          local: staging
-#          remote: home/wb/temp
-#          host: 185.173.94.106
-#          username: root
-#          password: gNHWBKf
+    - name: Copy folder content recursively to remote
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: staging
+        remote: home/wb/temp
+        host: 185.173.94.106
+        username: root
+        password: gNHWBKf
 
