@@ -27,9 +27,17 @@ jobs:
         name: Package
         path: staging
         retention-days: 5
-#  upload:
-#    needs: build
-#    runs-on: ubuntu-latest
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Echo download path'
+        run: | 
+          echo staging
+          cd staging
+          chmod u+rx staging
+          ls -la
+
 #    steps:
 #      - name: Copy folder content recursively to remote
 #        uses: garygrossgarten/github-action-scp@release
