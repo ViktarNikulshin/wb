@@ -27,12 +27,8 @@ jobs:
         name: Package
         path: staging
         retention-days: 5
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Echo download path'
-        run: | 
+    - name: Echo download path
+      run: | 
           echo staging
           cd staging
           chmod u+rx staging
