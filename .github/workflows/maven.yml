@@ -36,7 +36,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: staging/wb-1.0.0.war
-        remote: home/wb/temp
+        remote: home/wb
         host: 185.173.94.106
         username: root
         password: gNHWBKf
