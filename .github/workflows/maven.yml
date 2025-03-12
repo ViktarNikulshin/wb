@@ -36,7 +36,7 @@ jobs:
         with:
           local: staging
           remote: home/wb/temp
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER_NAME }}
-          password: ${{ secrets.PASSWORD }}
+          host: 185.173.94.106
+          username: root
+          password: gNHWBKf
 
