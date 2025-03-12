@@ -28,16 +28,12 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Copy to Remote Server
-      uses: pierrickdelrieu/scp-action@v0.1.0
-      with:
-        host: ${{ secrets.HOST }}
-        ssh_username: ${{ secrets.USER_NAME }}
-        ssh_key: ${{ secrets.SSH_KEY }}
-        source_dir: target/*.war
-        destination_dir: wd/tmp
-        rm: true
+      - name: Copy folder content recursively to remote
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: target/*.war
+          remote: home/wb/temp
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
+          password: ${{ secrets.PASSWORD }}
 
