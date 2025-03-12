@@ -32,7 +32,7 @@ jobs:
       - name: Copy folder content recursively to remote
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: target/*.war
+          local: /home/runner/work/wb/wb/target/wb-0.0.1-SNAPSHOT.war
           remote: home/wb/temp
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER_NAME }}
