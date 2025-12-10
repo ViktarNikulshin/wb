@@ -13,13 +13,13 @@ public class ReportMapper {
 
     public Report getReport(Waldberries wb) {
         Report report = new Report();
-        if (wb != null && wb.getProductData() != null && !wb.getProductData().getProducts().isEmpty()) {
-            report.setId(wb.getProductData().getProducts().get(0).getId());
-            report.setCardId(wb.getProductData().getProducts().get(0).getRoot());
-            report.setOptionId(wb.getProductData().getProducts().get(0).getSubjectId());
-            report.setBrand(wb.getProductData().getProducts().get(0).getBrand());
-            report.setFullName(wb.getProductData().getProducts().get(0).getName());
-            report.setSupplier(wb.getProductData().getProducts().get(0).getSupplier());
+        if (wb != null  && !wb.getProducts().isEmpty()) {
+            report.setId(wb.getProducts().get(0).getId());
+            report.setCardId(wb.getProducts().get(0).getRoot());
+            report.setOptionId(wb.getProducts().get(0).getSubjectId());
+            report.setBrand(wb.getProducts().get(0).getBrand());
+            report.setFullName(wb.getProducts().get(0).getName());
+            report.setSupplier(wb.getProducts().get(0).getSupplier());
             report.setPrice(getPrice(wb));
             report.setPriceBeforeDiscount(getPriceBeforeDiscount(wb));
         }
@@ -27,12 +27,12 @@ public class ReportMapper {
     }
 
     private Double getPrice(Waldberries wb) {
-        Waldberries.Size size = wb.getProductData().getProducts().get(0).getSizes()
+        Waldberries.Size size = wb.getProducts().get(0).getSizes()
                 .stream().findFirst()
                 .orElse(new Waldberries.Size());
 
         if (size.getPrice() != null) {
-            return (double) (size.getPrice().getTotal()) / 100;
+            return (double) (size.getPrice().getProduct() + size.getPrice().getLogistics()) / 100;
 
         }
         return 0.0;
@@ -40,7 +40,7 @@ public class ReportMapper {
     }
 
     private Double getPriceBeforeDiscount(Waldberries wb) {
-        Waldberries.Size size = wb.getProductData().getProducts().get(0).getSizes()
+        Waldberries.Size size = wb.getProducts().get(0).getSizes()
                 .stream().findFirst()
                 .orElse(new Waldberries.Size());
 

@@ -7,10 +7,9 @@ import java.util.List;
 
 @Data
 public class Waldberries {
-    private int state;
-    private int payloadVersion;
-    @JsonProperty("data")
-    private ProductData productData;
+
+    // Структура изменилась: products теперь в корне, без обертки "data"
+    private List<Product> products;
 
     @Data
     public static class Color {
@@ -19,15 +18,10 @@ public class Waldberries {
     }
 
     @Data
-    public static class ProductData {
-        private List<Product> products;
-    }
-
-    @Data
     public static class Price {
         private int basic;
         private int product;
-        private int total;
+        // Поле 'total' отсутствует в новом JSON, убрал его
         private int logistics;
         @JsonProperty("return")
         private int myreturn;
@@ -65,7 +59,13 @@ public class Waldberries {
         private int time1;
         private int time2;
         private int wh;
-        private int dtype;
+
+        // Внимание: значение 6682969112577 не влезает в int
+        private long dtype;
+
+        // Новые поля из JSON
+        private double weight;
+        private int dist;
     }
 
     @Data
@@ -78,7 +78,13 @@ public class Waldberries {
         private int time1;
         private int time2;
         private int wh;
-        private int dtype;
+
+        // Внимание: изменил на long
+        private long dtype;
+
+        // Новое поле
+        private int dist;
+
         private Price price;
         private int saleConditions;
         private String payload;
@@ -87,12 +93,16 @@ public class Waldberries {
     @Data
     public static class Stock {
         private int wh;
-        private int dtype;
+
+        // Внимание: изменил на long
+        private long dtype;
+
+        // Новое поле
+        private int dist;
+
         private int qty;
         private int priority;
         private int time1;
         private int time2;
     }
-
-
 }
