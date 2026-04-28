@@ -86,7 +86,7 @@ public class Waldberries {
         private int dist;
 
         private Price price;
-        private int saleConditions;
+        private String saleConditions;
         private String payload;
     }
 
